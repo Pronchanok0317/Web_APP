@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="../img/lotus.png">
+    <title>สั่งอาหาร</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 20px;
+        }
+
+        .menu {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 10px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        img {
+            width: 120px;
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>แบบฟอร์มสั่งอาหาร</h1>
+
+<form action="index.htm" method="get">
+
+    <label>ชื่อ</label><br>
+    <input type="text" name="fname"><br><br>
+
+    <label>นามสกุล</label><br>
+    <input type="text" name="lname"><br><br>
+
+    <label>เบอร์โทร</label><br>
+    <input type="text" name="phone"><br><br>
+
+    <label>ที่อยู่</label><br>
+    <textarea name="address" rows="3"></textarea><br><br>
+
+    <label>วันที่จัดส่ง</label>
+    <input type="date" name="date">
+
+    <label>เวลาจัดส่ง</label>
+    <input type="time" name="time">
+
+    <hr>
+
+    <h2>เลือกเมนูอาหาร</h2>
+
+    <div class="menu">
+        <img src="../img/Somtam.jpg" alt="ส้มตำ">
+
+        <div class="row">
+            <label>
+                <input type="checkbox" name="food[]" value="ส้มตำไทย">
+                ส้มตำไทย
+            </label>
+            <span>60 บาท</span>
+        </div>
+
+        จำนวน:
+        <input type="number" name="qty_somtam" min="1" value="1">
+
+        <br>
+        หมายเหตุ:
+        <textarea name="note_somtam"></textarea>
+    </div>
+
+    <div class="menu">
+        <img src="../img/PadThai.jpg" alt="ผัดไทย">
+
+        <div class="row">
+            <label>
+                <input type="checkbox" name="food[]" value="ผัดไทยกุ้งสด">
+                ผัดไทยกุ้งสด
+            </label>
+            <span>80 บาท</span>
+        </div>
+
+        จำนวน:
+        <input type="number" name="qty_padthai" min="1" value="1">
+
+        <br>
+        หมายเหตุ:
+        <textarea name="note_padthai"></textarea>
+    </div>
+
+    <div class="menu">
+        <img src="../img/Tomyum.jpg" alt="ต้มยำ">
+
+        <div class="row">
+            <label>
+                <input type="checkbox" name="food[]" value="ต้มยำกุ้งน้ำข้น">
+                ต้มยำกุ้งน้ำข้น
+            </label>
+            <span>120 บาท</span>
+        </div>
+
+        จำนวน:
+        <input type="number" name="qty_tomyum" min="1" value="1">
+
+        <br>
+        หมายเหตุ:
+        <textarea name="note_tomyum"></textarea>
+    </div>
+
+    <div class="menu">
+        <img src="../img/ChickenFried.jpg" alt="ไก่ทอด">
+
+        <div class="row">
+            <label>
+                <input type="checkbox" name="food[]" value="ไก่ทอดสมุนไพร">
+                ไก่ทอดสมุนไพร
+            </label>
+            <span>90 บาท</span>
+        </div>
+
+        จำนวน:
+        <input type="number" name="qty_friedchicken" min="1" value="1">
+
+        <br>
+        หมายเหตุ:
+        <textarea name="note_friedchicken"></textarea>
+    </div>
+
+    <br>
+
+    <input type="submit" value="สั่งอาหาร">
+    <input type="reset" value="ล้างข้อมูล">
+
+</form>
+
+<hr>
+
+<a href="../index.html">หน้าหลัก</a>
+
+<br><br>
+
+<a href="menu.html">ดูรายการอาหาร</a>
+
+</body>
+</html>
