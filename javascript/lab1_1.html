@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Item 1</title>
+<style>
+    #btn{
+        width:120px;
+        height:40px;
+        font-size:20px;
+        color:white;
+        background:red;
+    }
+</style>
+</head>
+<body>
+
+<button id="btn" onclick="changeColor()">Go Blue</button>
+
+<script>
+function changeColor() {
+    let btn = document.getElementById("btn");
+
+    if(btn.innerHTML == "Go Blue"){
+        btn.innerHTML = "Go Red";
+        btn.style.backgroundColor = "blue";
+    }else{
+        btn.innerHTML = "Go Blue";
+        btn.style.backgroundColor = "red";
+    }
+}
+</script>
+
+</body>
+</html>

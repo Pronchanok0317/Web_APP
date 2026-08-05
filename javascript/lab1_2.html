@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Item 2</title>
+</head>
+<body>
+
+<p id="showText">Hello world</p>
+
+<input type="text" id="txt">
+<input type="color" id="color">
+<button onclick="showData()">Click</button>
+
+<script>
+
+function showData(){
+
+    let text = document.getElementById("txt").value;
+    let color = document.getElementById("color").value;
+
+    document.getElementById("showText").innerHTML = text;
+    document.getElementById("showText").style.color = color;
+
+}
+
+</script>
+
+</body>
+</html>

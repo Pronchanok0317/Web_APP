@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Item 3</title>
+</head>
+
+<body>
+
+<h1 id="num">1</h1>
+
+<button onclick="countUp()">Count Up</button>
+<button onclick="countDown()">Count Down</button>
+
+<script>
+
+let number = 1;
+
+function countUp(){
+
+    number++;
+    document.getElementById("num").innerHTML = number;
+
+}
+
+function countDown(){
+
+    number--;
+    document.getElementById("num").innerHTML = number;
+
+}
+
+</script>
+
+</body>
+</html>
