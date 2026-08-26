@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>counter</title>
+
+
+    <style>
+        button {
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .box {
+        border: 1px solid #ccc;
+        padding: 20px;
+        display: inline-block;
+    }
+
+    .row-box {
+        display: flex;
+        flex-direction: row;
+        gap: 10px;
+        justify-content: start;
+    }
+
+    #btn {
+        width: 120px;
+        height: 40px;
+        font-size: 20px;
+        color: white;
+        background: red;
+    }
+
+    
+    </style>
+</head>
+
+
+<body>
+    <div class="box">
+
+    <h1 id="num">0</h1>
+
+    <button onclick="countUp()">+</button>
+    
+
+    <button onclick="reset()">reset</button>
+
+    <button onclick="countDown()">-</button>
+
+
+</div>
+<script>
+    let number = 0;
+
+    function countUp(){
+
+        number++;
+
+        document.getElementById("num").innerHTML = number;
+
+    }
+
+
+    function countDown(){
+
+        number--;
+
+        document.getElementById("num").innerHTML = number;
+
+    }
+
+    function reset(){
+        number = 0;
+        document.getElementById("num").innerText = number;          
+    }
+
+</script>
+</body>
+
+</html>
