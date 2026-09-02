@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote Result</title>
+
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .card {
+            background-color: #4da6b5;
+            padding: 30px 50px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+        }
+
+        .vote-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <h2>Vote Result</h2>
+
+        <div class="vote-container">
+
+            <div>
+                <img src="img/hamburger.png" width="60">
+                <span id="count-a"></span>
+            </div>
+
+            <div>
+                <img src="img/pizza.png" width="60">
+                <span id="count-b"></span>
+            </div>
+
+            <div>
+                <img src="img/hotdog.png" width="60">
+                <span id="count-c"></span>
+            </div>
+
+        </div>
+
+        <button onclick="backToVote()">Back to Vote</button>
+        <button onclick="clearVote()">Clear Vote</button>
+
+    </div>
+
+    <script>
+        let a = localStorage.getItem("a");
+        let b = localStorage.getItem("b");
+        let c = localStorage.getItem("c");
+
+        document.getElementById("count-a").innerText = a;
+        document.getElementById("count-b").innerText = b;
+        document.getElementById("count-c").innerText = c;
+
+        function backToVote() {
+            window.close();
+        }
+function backToVote() {
+    window.location.href = "Practice2.html";
+}
+
+function clearVote() {
+    localStorage.setItem("a", 0);
+    localStorage.setItem("b", 0);
+    localStorage.setItem("c", 0);
+
+    document.getElementById("count-a").innerText = 0;
+    document.getElementById("count-b").innerText = 0;
+    document.getElementById("count-c").innerText = 0;
+}
+
+    </script>
+
+</body>
+</html>

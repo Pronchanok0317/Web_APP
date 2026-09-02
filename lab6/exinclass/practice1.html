@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>click me before 5 second</div>
+    <div id="count"></div>
+    <button id="stop">click me</button>
+    
+    <script>
+        let textCount = document.getElementById("count");;
+        let btnStop = document.getElementById("stop");
+        let c = 5;
+        let myTimeout;
+        function countDown(){
+            textCount.innerText = c;
+            c--;
+            myTimeout = setTimeout(countDown,1000);
+
+            if(c==0){
+                clearTimeout(myTimeout); 
+                textCount.innerText = "you bombed";              
+            }
+        }
+        btnStop.addEventListener("click",stopBomb);
+        function stopBomb(){
+            clearTimeout(myTimeout); 
+            textCount.innerText = "you safe";
+            restart();
+        }
+        function restart(){
+            btnStop.innerText = "restart" 
+            btnStop.removeEventListener("click", stopBomb);
+            btnStop.addEventListener("click", startAgain); 
+        }
+        function startAgain(){
+            c = 5;
+            btnStop.innerText = "click me";
+
+            btnStop.removeEventListener("click", startAgain);
+            btnStop.addEventListener("click", stopBomb);
+
+            countDown();
+        }
+
+        countDown();
+    </script>
+</body>
+</html>
