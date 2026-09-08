@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card calc-container">
+        <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
+        <input type="text" class="calc-screen" id="calc-screen" readonly>
+        <div class="calc-grid">
+            
+            <button class="calc-btn clear" onclick="clearCalc()">C</button>
+            <button class="calc-btn op" onclick="appendCalc('/')">/</button>
+            <button class="calc-btn op" onclick="appendCalc('*')">*</button>
+            <button class="calc-btn op" onclick="appendCalc('-')">-</button>
+
+            
+            <button class="calc-btn" onclick="appendCalc('7')">7</button>
+            <button class="calc-btn" onclick="appendCalc('8')">8</button>
+            <button class="calc-btn" onclick="appendCalc('9')">9</button>
+            <button class="calc-btn op" onclick="appendCalc('+')">+</button>
+
+            
+            <button class="calc-btn" onclick="appendCalc('4')">4</button>
+            <button class="calc-btn" onclick="appendCalc('5')">5</button>
+            <button class="calc-btn" onclick="appendCalc('6')">6</button>
+
+            <button class="calc-btn" onclick="appendCalc('1')">1</button>
+            <button class="calc-btn" onclick="appendCalc('2')">2</button>
+            <button class="calc-btn" onclick="appendCalc('3')">3</button>
+            
+           
+            <button class="calc-btn equal" onclick="calculateResult()">=</button>
+
+           
+            <button class="calc-btn btn-zero" onclick="appendCalc('0')">0</button>
+            <button class="calc-btn" onclick="appendCalc('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        const calcScreen = document.getElementById("calc-screen");
+
+        function appendCalc(val) {
+            calcScreen.value += val;
+        }
+
+        function clearCalc() {
+            calcScreen.value = "";
+        }
+
+        function calculateResult() {
+            try {
+                if (calcScreen.value !== "") {
+                    // คำนวณผลลัพธ์
+                    let rawResult = eval(calcScreen.value);
+                    
+                    // ป้องกันปัญหาทศนิยมเกิน เช่น 0.1 + 0.2 = 0.30000000000000004
+                    if (typeof rawResult === 'number' && !Number.isInteger(rawResult)) {
+                        rawResult = parseFloat(rawResult.toPrecision(12));
+                    }
+                    
+                    calcScreen.value = rawResult;
+                }
+            } catch (error) {
+                calcScreen.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
