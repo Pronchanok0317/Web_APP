@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vote</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+        }
+
+        .card {
+            background-color: #4da6b5;
+            padding: 30px 50px;
+            border-radius: 20px;
+            text-align: center;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .vote-container {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .vote-container button {
+            background: white;
+            border: none;
+            border-radius: 12px;
+            padding: 10px;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .vote-container button:hover {
+            transform: scale(1.05);
+        }
+
+        .btn-show {
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+            background-color: white;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="card">
+        <a href="index.html" class="back-link" style="color: white; display: block; text-align: left; margin-bottom: 10px;">← กลับหน้าหลัก</a>
+
+        <h2>Vote the favorite</h2>
+
+        <div class="vote-container">
+            <button type="button" onclick="vote('a')">
+                <img src="img/hamburger.png" alt="Burger" width="60" height="60">
+            </button>
+
+            <button type="button" onclick="vote('b')">
+                <img src="img/pizza.png" alt="Pizza" width="60" height="60">
+            </button>
+
+            <button type="button" onclick="vote('c')">
+                <img src="img/hotdog.png" alt="Hotdog" width="60" height="60">
+            </button>
+        </div>
+
+        <button class="btn-show" onclick="showResults()">Show Vote</button>
+    </div>
+
+    <script>
+        let a = Number(localStorage.getItem("a")) || 0;
+        let b = Number(localStorage.getItem("b")) || 0;
+        let c = Number(localStorage.getItem("c")) || 0;
+
+        function vote(choice) {
+            if (choice === 'a') { a++; }
+            else if (choice === 'b') { b++; }
+            else if (choice === 'c') { c++; }
+        }
+
+        function showResults() {
+            localStorage.setItem("a", a);
+            localStorage.setItem("b", b);
+            localStorage.setItem("c", c);
+
+            window.location.href = "result.html";
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Puzzle Game</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .final-score-box {
+            text-align: center;
+            padding: 20px 0;
+        }
+        .final-score-box h3 {
+            font-size: 28px;
+            margin: 10px 0;
+            color: #333;
+        }
+        .score-display {
+            font-size: 48px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin: 15px 0;
+        }
+        .action-btn-group {
+            display: flex;
+            justify-content: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card word-game-card">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
+            <a href="word_manage.html" class="nav-btn-sm" style="background-color: #673ab7;">⚙️ Word Manage</a>
+        </div>
+
+        <div id="game-panel">
+            <h2 style="margin: 5px 0; text-align: center;">Word Game</h2>
+            
+            <div class="game-status">
+                <span>ข้อที่: <b id="round-num">1</b>/5</span>
+                <span>คะแนน: <b id="score-num">0</b></span>
+                <span>เวลา: <b id="timer">10</b>s</span>
+            </div>
+
+            <div id="drop-zone-container" class="drop-zone-container"></div>
+            <div id="drag-source-container" class="drag-source-container"></div>
+
+            <div style="text-align: center; margin-top: 15px;">
+                <button id="reset-btn" class="reset-btn" onclick="initGame()">Reset</button>
+            </div>
+        </div>
+
+        <!--Final Score-->
+        <div id="final-score-panel" class="final-score-box" style="display: none;">
+            <h2>🎉 Game Over! 🎉</h2>
+            <p>คุณเล่นครบ 5 ข้อเรียบร้อยแล้ว</p>
+            <div class="score-display">
+                <span id="final-score-text">0</span> / 5
+            </div>
+            <p id="feedback-text" style="font-weight: bold;"></p>
+
+            <div class="action-btn-group">
+                <button class="reset-btn" onclick="initGame()">Play Again</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let words = [];
+        let currentRound = 0;
+        let score = 0;
+        let targetWord = "";
+        let timerId = null;
+        let timeLeft = 10;
+
+        function initGame() {
+            const saved = localStorage.getItem("word_list");
+            words = saved ? JSON.parse(saved) : ["cat", "dog"];
+
+            if (words.length === 0) {
+                alert("ยังไม่มีคำศัพท์ในระบบ! กรุณาไปเพิ่มคำศัพท์ที่หน้า Word Manage ก่อนครับ");
+                window.location.href = "word_manage.html";
+                return;
+            }
+
+            currentRound = 0;
+            score = 0;
+            document.getElementById("score-num").innerText = score;
+
+            document.getElementById("game-panel").style.display = "block";
+            document.getElementById("final-score-panel").style.display = "none";
+
+            nextRound();
+        }
+
+        function nextRound() {
+            clearInterval(timerId);
+
+            if (currentRound >= 5) {
+                showFinalScore();
+                return;
+            }
+
+            currentRound++;
+            document.getElementById("round-num").innerText = currentRound;
+            
+            targetWord = words[Math.floor(Math.random() * words.length)].toUpperCase();
+            
+            // สร้าง Drop Zones (ช่องวาง)
+            const dropContainer = document.getElementById("drop-zone-container");
+            dropContainer.innerHTML = "";
+            for (let i = 0; i < targetWord.length; i++) {
+                const zone = document.createElement("div");
+                zone.className = "letter-box drop-zone";
+                zone.dataset.index = i;
+                zone.ondragover = (e) => e.preventDefault();
+                zone.ondrop = (e) => handleDrop(e);
+                dropContainer.appendChild(zone);
+            }
+
+            // สุ่มตำแหน่งตัวอักษร
+            const shuffled = targetWord.split('').sort(() => Math.random() - 0.5);
+            const dragContainer = document.getElementById("drag-source-container");
+            dragContainer.innerHTML = "";
+            shuffled.forEach((char, idx) => {
+                const letter = document.createElement("div");
+                letter.className = "letter-box drag-item";
+                letter.draggable = true;
+                letter.id = `drag-${idx}-${char}`;
+                letter.innerText = char;
+                letter.ondragstart = (e) => {
+                    e.dataTransfer.setData("text", e.target.id);
+                };
+                dragContainer.appendChild(letter);
+            });
+
+            // นับถอยหลัง 10 วินาที
+            timeLeft = 10;
+            document.getElementById("timer").innerText = timeLeft;
+            timerId = setInterval(() => {
+                timeLeft--;
+                document.getElementById("timer").innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(timerId);
+                    alert("หมดเวลา! ข้ามไปข้อถัดไป");
+                    nextRound();
+                }
+            }, 1000);
+        }
+
+        function handleDrop(e) {
+            e.preventDefault();
+            const id = e.dataTransfer.getData("text");
+            const draggedEl = document.getElementById(id);
+            const targetZone = e.target;
+
+            if (targetZone.classList.contains("drop-zone") && targetZone.children.length === 0) {
+                targetZone.appendChild(draggedEl);
+                
+                // ใช้ setTimeout เล็กน้อยเพื่อให้ Browser วาดการย้ายตัวอักษรลงในช่องก่อนสั่งตรวจสอบ
+                setTimeout(() => {
+                    checkAnswer();
+                }, 50);
+            }
+        }
+
+        function checkAnswer() {
+            const dropZones = document.querySelectorAll(".drop-zone");
+            let currentStr = "";
+            let filledCount = 0;
+
+            dropZones.forEach(zone => {
+                if (zone.children.length > 0) {
+                    currentStr += zone.children[0].innerText;
+                    filledCount++;
+                }
+            });
+
+            if (filledCount === targetWord.length) {
+                clearInterval(timerId);
+                
+                if (currentStr === targetWord) {
+                    score++;
+                    document.getElementById("score-num").innerText = score;
+                    alert("ถูกต้องครับ! 🎉");
+                } else {
+                    alert(`ผิดครับ! คำที่ถูกคือ ${targetWord}`);
+                }
+                
+                nextRound();
+            }
+        }
+
+        function showFinalScore() {
+            document.getElementById("game-panel").style.display = "none";
+            document.getElementById("final-score-panel").style.display = "block";
+            
+            document.getElementById("final-score-text").innerText = score;
+
+            const feedback = document.getElementById("feedback-text");
+            if (score === 5) {
+                feedback.innerText = "ยอดเยี่ยมมาก! ได้คะแนนเต็ม 🌟";
+            } else if (score >= 3) {
+                feedback.innerText = "เก่งมาก! ผ่านเกณฑ์ 👍";
+            } else {
+                feedback.innerText = "พยายามอีกนิดนะ! ลองใหม่อีกครั้ง ✌️";
+            }
+        }
+
+        initGame();
+    </script>
+</body>
+</html>
