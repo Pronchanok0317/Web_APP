@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Words</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card word-card">
+        <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
+        <div class="todo-input-box">
+            <input type="text" id="word-input" placeholder="Enter your word">
+        </div>
+        <ul class="todo-list" id="word-list"></ul>
+        <div style="margin-top: 15px; text-align: center;">
+            <a href="word_game.html" class="nav-btn-sm">ไปเล่นเกมทายคำศัพท์ →</a>
+        </div>
+    </div>
+
+    <script>
+        const wordInput = document.getElementById("word-input");
+        const wordList = document.getElementById("word-list");
+
+        function getWords() {
+            const saved = localStorage.getItem("word_list");
+            return saved ? JSON.parse(saved) : ["cat", "dog"];
+        }
+
+        function saveWords(words) {
+            localStorage.setItem("word_list", JSON.stringify(words));
+        }
+
+        function renderWords() {
+            wordList.innerHTML = "";
+            const words = getWords();
+            words.forEach((word, index) => {
+                const li = document.createElement("li");
+                li.className = "todo-item";
+                li.innerHTML = `
+                    <span>${word}</span>
+                    <button class="icon-btn" onclick="deleteWord(${index})">
+                        <svg class="delete-icon" viewBox="0 0 24 24"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg>
+                    </button>
+                `;
+                wordList.appendChild(li);
+            });
+        }
+
+        wordInput.addEventListener("keydown", function(e) {
+            if (e.key === "Enter" && wordInput.value.trim() !== "") {
+                const words = getWords();
+                words.push(wordInput.value.trim().toLowerCase());
+                saveWords(words);
+                wordInput.value = "";
+                renderWords();
+            }
+        });
+
+        function deleteWord(index) {
+            const words = getWords();
+            words.splice(index, 1);
+            saveWords(words);
+            renderWords();
+        }
+
+        renderWords();
+    </script>
+</body>
+</html>

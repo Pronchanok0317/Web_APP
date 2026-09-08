@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fruit Matching Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card fruit-card">
+        <a href="index.html" class="back-link">← กลับหน้าหลัก</a>
+        <h2>เกมจับคู่ผลไม้</h2>
+        
+        <div id="fruit-grid" class="fruit-grid"></div>
+
+        <div style="text-align: center; margin-top: 15px;">
+            <button class="reset-btn" onclick="initFruitGame()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        const fruitGrid = document.getElementById("fruit-grid");
+        let firstCard = null;
+        let secondCard = null;
+        let lockBoard = false;
+
+        function initFruitGame() {
+            fruitGrid.innerHTML = "";
+            firstCard = null;
+            secondCard = null;
+            lockBoard = false;
+
+            // มีผลไม้ 8 ภาพ (ภาพละ 2 ใบ รวมเป็น 16 ใบ)
+            const fruits = [];
+            for (let i = 1; i <= 8; i++) {
+                fruits.push(`img/fruit${i}.png`, `img/fruit${i}.png`);
+            }
+            fruits.sort(() => Math.random() - 0.5);
+
+            fruits.forEach((imgSrc) => {
+                const card = document.createElement("div");
+                card.className = "fruit-card-item";
+                card.dataset.fruit = imgSrc;
+
+                card.innerHTML = `
+                    <div class="card-inner">
+                        <div class="card-front">?</div>
+                        <div class="card-back"><img src="${imgSrc}" alt="fruit"></div>
+                    </div>
+                `;
+
+                card.addEventListener("click", flipCard);
+                fruitGrid.appendChild(card);
+            });
+        }
+
+        function flipCard() {
+            if (lockBoard || this === firstCard || this.classList.contains("flipped")) return;
+
+            this.classList.add("flipped");
+
+            if (!firstCard) {
+                firstCard = this;
+                return;
+            }
+
+            secondCard = this;
+            lockBoard = true;
+
+            checkMatch();
+        }
+
+        function checkMatch() {
+            const isMatch = firstCard.dataset.fruit === secondCard.dataset.fruit;
+
+            if (isMatch) {
+                resetBoardState();
+            } else {
+                // หากไม่ตรงกัน รอ 2 วินาที แล้วปิดภาพ[cite: 2]
+                setTimeout(() => {
+                    firstCard.classList.remove("flipped");
+                    secondCard.classList.remove("flipped");
+                    resetBoardState();
+                }, 2000);
+            }
+        }
+
+        function resetBoardState() {
+            [firstCard, secondCard] = [null, null];
+            lockBoard = false;
+        }
+
+        initFruitGame();
+    </script>
+</body>
+</html>
