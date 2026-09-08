@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Counter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="card counter-container">
+        <a href="index.html" class="back-link" style="display:block; text-align:left;">← กลับหน้าหลัก</a>
+        <div class="counter-value" id="counter-value">0</div>
+        <div class="counter-btn-group">
+            <button class="counter-btn btn-decrease" id="btn-decrease">-</button>
+            <button class="counter-btn btn-reset" id="btn-reset">Reset</button>
+            <button class="counter-btn btn-increase" id="btn-increase">+</button>
+        </div>
+    </div>
+
+    <script>
+        let count = 0;
+        const counterValueEl = document.getElementById("counter-value");
+        
+        function updateCounterUI() {
+            counterValueEl.innerText = count;
+            if (count > 0) {
+                counterValueEl.style.color = "green";
+            } else if (count < 0) {
+                counterValueEl.style.color = "red";
+            } else {
+                counterValueEl.style.color = "black";
+            }
+        }
+
+        document.getElementById("btn-increase").addEventListener("click", function() {
+            count++;
+            updateCounterUI();
+        });
+
+        document.getElementById("btn-decrease").addEventListener("click", function() {
+            count--;
+            updateCounterUI();
+        });
+
+        document.getElementById("btn-reset").addEventListener("click", function() {
+            count = 0;
+            updateCounterUI();
+        });
+    </script>
+</body>
+</html>
