@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: Arial, Tahoma, sans-serif;
+  background-color: #fff8ee;
+  color: #2d2924;
+}
+
+.container {
+  width: 90%;
+  max-width: 960px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #ead8c0;
+  border-radius: 10px;
+}
+
+h1 {
+  color: #9d3028;
+}
+
+h2 {
+  color: #2f6f4e;
+}
+
+.highlight {
+  color: #9d3028;
+  font-weight: bold;
+}
+
+nav table {
+  margin-bottom: 20px;
+}
+
+nav a {
+  color: #9d3028;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+nav ul {
+  margin: 0 20px 0 0;
+  padding-left: 20px;
+}
+
+.image-table img {
+  width: 200px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.menu-table {
+  width: 100%;
+  background-color: #fffdf8;
+}
+
+.menu-table tr:not(:first-child) {
+  cursor: pointer;
+}
+
+.menu-table tr:not(:first-child):hover {
+  background-color: #fff0dc;
+}
+
+.menu-table img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.order-box {
+  margin: 12px 0;
+  padding: 10px;
+  border: 1px solid #ead8c0;
+  border-radius: 8px;
+}
+
+.order-box table {
+  width: 100%;
+}
+
+.price {
+  color: #2f6f4e;
+  font-weight: bold;
+  text-align: right;
+}
+
+input {
+  margin: 5px;
+  padding: 6px;
+}
+
+.button {
+  padding: 10px 16px;
+  border: 0;
+  border-radius: 6px;
+  background-color: #9d3028;
+  color: white;
+  cursor: pointer;
+}
+
+.detail {
+  text-align: center;
+}
+
+.detail a {
+  color: #9d3028;
+  font-weight: bold;
+}
+
+.confirm-box {
+  max-width: 720px;
+}
+
+.link-button {
+  display: inline-block;
+  margin: 8px 8px 0 0;
+  text-decoration: none;
+}
+
+.food-description {
+  max-width: 640px;
+  margin: 12px auto 20px;
+  color: #5f5146;
+  line-height: 1.7;
+}

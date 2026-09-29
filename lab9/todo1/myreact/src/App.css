@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  background: #fff7ec;
+  color: #2d2924;
+  font-family: Arial, Tahoma, sans-serif;
+}
+
+.parent {
+  width: min(900px, calc(100% - 32px));
+  margin: 0 auto;
+  padding: 30px 0 48px;
+}
+
+.back-link {
+  color: #9d3028;
+  font-weight: bold;
+}
+
+h1 {
+  color: #9d3028;
+}
+
+.card {
+  margin-top: 18px;
+  padding: 24px;
+  background: #fff;
+  border: 1px solid #ead8c0;
+  border-radius: 10px;
+}
+
+.RedButton,
+.blueButton {
+  margin: 8px 8px 0 0;
+  padding: 16px 22px;
+  border: 0;
+  border-radius: 8px;
+  color: aliceblue;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.blueButton {
+  background-color: blue;
+}
+
+.RedButton {
+  background-color: red;
+}
+
+input {
+  margin: 6px;
+  padding: 10px;
+  border: 1px solid #d8c6ac;
+  border-radius: 8px;
+}
+
+.count-number {
+  font-size: 42px;
+  color: #2f6f4e;
+}

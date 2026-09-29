@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="สั่งอาหารร้านสัตตบุษย์">
+  <meta name="keywords" content="สั่งอาหาร, ฟอร์มสั่งอาหาร, ร้านอาหาร">
+  <title>สั่งอาหาร</title>
+  <link rel="icon" href="/images/lotus.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>ร้านอาหารสัตตบุษย์</h1>
+    <p>แบบฟอร์มสั่งอาหาร กรุณากรอกข้อมูลให้ครบถ้วน</p>
+
+    <nav>
+      <table>
+        <tr>
+          <td><a href="/home"><ul><li>Home</li></ul></a></td>
+          <td><a href="/menu"><ul><li>Menu</li></ul></a></td>
+          <td><a href="/order"><ul><li>Order</li></ul></a></td>
+        </tr>
+      </table>
+    </nav>
+
+    <h2>เลือกรายการอาหาร</h2>
+    <form id="orderForm" action="/confirm" method="get">
+      <div class="order-box">
+        <table>
+          <tr>
+            <td><input type="checkbox" name="menu" value="TH-001"> ส้มตำไทย</td>
+            <td class="price">60 บาท</td>
+          </tr>
+          <tr>
+            <td>จำนวน: <input type="number" name="qty_somtam" min="1" max="10" value="1"></td>
+            <td>คำสั่งพิเศษ: <input type="text" name="note_somtam" placeholder="เช่น เผ็ดน้อย"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="order-box">
+        <table>
+          <tr>
+            <td><input type="checkbox" name="menu" value="TH-002"> ผัดไทยกุ้งสด</td>
+            <td class="price">80 บาท</td>
+          </tr>
+          <tr>
+            <td>จำนวน: <input type="number" name="qty_padthai" min="1" max="10" value="1"></td>
+            <td>คำสั่งพิเศษ: <input type="text" name="note_padthai" placeholder="เช่น ไม่ใส่ถั่ว"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="order-box">
+        <table>
+          <tr>
+            <td><input type="checkbox" name="menu" value="TH-003"> ต้มยำกุ้งน้ำข้น</td>
+            <td class="price">120 บาท</td>
+          </tr>
+          <tr>
+            <td>จำนวน: <input type="number" name="qty_tomyum" min="1" max="10" value="1"></td>
+            <td>คำสั่งพิเศษ: <input type="text" name="note_tomyum" placeholder="เช่น เพิ่มเห็ด"></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="order-box">
+        <table>
+          <tr>
+            <td><input type="checkbox" name="menu" value="TH-004"> ไก่ทอดสมุนไพร</td>
+            <td class="price">90 บาท</td>
+          </tr>
+          <tr>
+            <td>จำนวน: <input type="number" name="qty_chicken" min="1" max="10" value="1"></td>
+            <td>คำสั่งพิเศษ: <input type="text" name="note_chicken" placeholder="เช่น ขอซอสเพิ่ม"></td>
+          </tr>
+        </table>
+      </div>
+
+      <h2>ข้อมูลจัดส่งและเวลา</h2>
+      <div>
+        <label for="name">ชื่อผู้รับ:</label>
+        <input type="text" id="name" name="name" placeholder="ชื่อ-นามสกุล" required>
+      </div>
+      <div>
+        <label for="phone">เบอร์โทรศัพท์:</label>
+        <input type="tel" id="phone" name="phone" placeholder="08xxxxxxxx" required pattern="[0-9]{10}">
+      </div>
+      <div>
+        <label for="delivery-date">วันที่จัดส่ง:</label>
+        <input type="date" id="delivery-date" name="delivery-date" required>
+        <label for="delivery-time">เวลาจัดส่ง:</label>
+        <input type="time" id="delivery-time" name="delivery-time" required>
+      </div>
+      <div>
+        <label for="address">ที่อยู่จัดส่ง:</label>
+        <input type="text" id="address" name="address" placeholder="ระบุ บ้านเลขที่, ซอย, ถนน, ตำบล, อำเภอ" required>
+      </div>
+      <div>
+        <input class="button" type="submit" value="ยืนยันการสั่งซื้อ">
+        <input class="button" type="reset" value="ล้างข้อมูล">
+      </div>
+    </form>
+  </div>
+  <script>
+    document.getElementById('orderForm').addEventListener('submit', function (event) {
+      const selectedMenu = document.querySelector('input[name="menu"]:checked');
+      if (!selectedMenu) {
+        event.preventDefault();
+        alert('กรุณาเลือกรายการอาหารอย่างน้อย 1 รายการ');
+      }
+    });
+  </script>
+</body>
+</html>
+
+

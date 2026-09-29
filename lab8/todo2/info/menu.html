@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="เมนูร้านอาหารสัตตบุษย์">
+  <meta name="keywords" content="เมนูอาหาร, อาหารไทย, ราคาอาหาร">
+  <title>เมนูอาหาร</title>
+  <link rel="icon" href="/images/lotus.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>ร้านอาหารสัตตบุษย์</h1>
+    <p>เมนูอาหารประจำร้าน คลิกแถวเมนูเพื่อดูชื่อเมนูและราคาผ่าน Route Parameters</p>
+
+    <nav>
+      <table>
+        <tr>
+          <td><a href="/home"><ul><li>Home</li></ul></a></td>
+          <td><a href="/menu"><ul><li>Menu</li></ul></a></td>
+          <td><a href="/order"><ul><li>Order</li></ul></a></td>
+        </tr>
+      </table>
+    </nav>
+
+    <h2>เมนูอาหารประจำร้าน</h2>
+    <table border="1" cellpadding="10" cellspacing="0" class="menu-table">
+      <tr>
+        <th>รหัสเมนู</th>
+        <th>ภาพตัวอย่าง</th>
+        <th>ชื่อเมนู</th>
+        <th>ประเภท</th>
+        <th>ราคา (บาท)</th>
+      </tr>
+      <tr onclick="window.location.href='/item/ส้มตำไทย/price/60'">
+        <td>TH-001</td>
+        <td><img src="/images/Somtam.jpg" alt="ส้มตำไทย"></td>
+        <td>ส้มตำไทย</td>
+        <td>อาหารรสจัด</td>
+        <td>60</td>
+      </tr>
+      <tr onclick="window.location.href='/item/ผัดไทยกุ้งสด/price/80'">
+        <td>TH-002</td>
+        <td><img src="/images/PadThai.jpg" alt="ผัดไทยกุ้งสด"></td>
+        <td>ผัดไทยกุ้งสด</td>
+        <td>อาหารจานหลัก</td>
+        <td>80</td>
+      </tr>
+      <tr onclick="window.location.href='/item/ต้มยำกุ้งน้ำข้น/price/120'">
+        <td>TH-003</td>
+        <td><img src="/images/Tomyum.jpg" alt="ต้มยำกุ้งน้ำข้น"></td>
+        <td>ต้มยำกุ้งน้ำข้น</td>
+        <td>อาหารรสจัด</td>
+        <td>120</td>
+      </tr>
+      <tr onclick="window.location.href='/item/ไก่ทอดสมุนไพร/price/90'">
+        <td>TH-004</td>
+        <td><img src="/images/ChickenFried.jpg" alt="ไก่ทอดสมุนไพร"></td>
+        <td>ไก่ทอดสมุนไพร</td>
+        <td>อาหารจานหลัก</td>
+        <td>90</td>
+      </tr>
+    </table>
+  </div>
+</body>
+</html>
