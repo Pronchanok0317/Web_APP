@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ร้านอาหารสัตตบุษย์</title>
+  <link rel="icon" href="/images/lotus.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main>
+    <section class="hero">
+      <div class="hero-content">
+        <h1>ร้านอาหารสัตตบุษย์</h1>
+        <p>ร้านอาหารไทยที่คัดสรรวัตถุดิบสดใหม่ ปรุงอาหารด้วยความพิถีพิถัน พร้อมเสิร์ฟเมนูยอดนิยมให้ทุกมื้อของคุณ</p>
+        <a class="button" href="/menu">ดูเมนูอาหาร</a>
+      </div>
+    </section>
+
+    <section class="container">
+      <nav>
+        <a href="/home">Home</a>
+        <a href="/menu">Menu</a>
+        <a href="/order">Order</a>
+      </nav>
+
+      <h2>เมนูแนะนำ</h2>
+      <section id="bestSellerList" class="feature-grid"></section>
+    </section>
+  </main>
+
+  <script>
+    const bestSellerList = document.getElementById("bestSellerList");
+
+    async function loadBestSellers() {
+      const response = await fetch("/api/menus");
+      const menus = await response.json();
+      const bestSellers = menus.filter((menu) => menu.isBestSeller);
+
+      if (bestSellers.length === 0) {
+        bestSellerList.innerHTML = '<p class="muted">ยังไม่มีเมนูแนะนำ</p>';
+        return;
+      }
+
+      bestSellerList.innerHTML = bestSellers.map((menu) => `
+        <article>
+          <img src="${menu.image}" alt="${menu.name}">
+          <h3>${menu.name}</h3>
+          <p>${menu.description}</p>
+          <p class="price">${menu.price} บาท</p>
+        </article>
+      `).join("");
+    }
+
+    loadBestSellers();
+  </script>
+</body>
+</html>

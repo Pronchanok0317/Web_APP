@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>สั่งอาหาร</title>
+  <link rel="icon" href="/images/lotus.png" type="image/png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>สั่งอาหาร</h1>
+    <p class="muted">กรอกข้อมูลจัดส่งและเลือกรายการอาหารที่ต้องการ</p>
+
+    <nav>
+      <a href="/home">Home</a>
+      <a href="/menu">Menu</a>
+      <a href="/order">Order</a>
+    </nav>
+
+    <form id="orderForm">
+      <h2>เลือกรายการอาหาร</h2>
+      <section id="menuChoices" class="order-grid"></section>
+
+      <h2>ข้อมูลจัดส่ง</h2>
+      <div class="row">
+        <div>
+          <label for="customerName">ชื่อผู้รับ</label>
+          <input id="customerName" name="customerName" required>
+        </div>
+        <div>
+          <label for="phone">เบอร์โทรศัพท์</label>
+          <input id="phone" name="phone" required pattern="[0-9]{10}" placeholder="08xxxxxxxx">
+        </div>
+      </div>
+
+      <div class="row">
+        <div>
+          <label for="deliveryDate">วันที่จัดส่ง</label>
+          <input id="deliveryDate" name="deliveryDate" type="date" required>
+        </div>
+        <div>
+          <label for="deliveryTime">เวลาจัดส่ง</label>
+          <input id="deliveryTime" name="deliveryTime" type="time" required>
+        </div>
+      </div>
+
+      <label for="address">ที่อยู่จัดส่ง</label>
+      <textarea id="address" name="address" required></textarea>
+
+      <button class="button" type="submit">ยืนยันการสั่งซื้อ</button>
+      <button class="button secondary" type="reset">ล้างข้อมูล</button>
+    </form>
+
+    <div id="message"></div>
+  </main>
+
+  <script>
+    const form = document.getElementById("orderForm");
+    const menuChoices = document.getElementById("menuChoices");
+    const message = document.getElementById("message");
+
+    async function loadMenuChoices() {
+      const response = await fetch("/api/menus");
+      const menus = await response.json();
+
+      menuChoices.innerHTML = menus.map((menu) => `
+        <article class="card">
+          <label>
+            <input type="checkbox" name="menuId" value="${menu.id}">
+            ${menu.name}
+          </label>
+          <p class="price">${menu.price} บาท</p>
+          <label>จำนวน</label>
+          <input type="number" name="qty-${menu.id}" min="1" max="10" value="1">
+          <label>คำสั่งพิเศษ</label>
+          <input type="text" name="note-${menu.id}" placeholder="เช่น เผ็ดน้อย">
+        </article>
+      `).join("");
+    }
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const data = new FormData(form);
+      const selected = [...document.querySelectorAll("input[name='menuId']:checked")];
+
+      if (selected.length === 0) {
+        alert("กรุณาเลือกรายการอาหารอย่างน้อย 1 รายการ");
+        return;
+      }
+
+      const body = {
+        customerName: data.get("customerName"),
+        phone: data.get("phone"),
+        deliveryDate: data.get("deliveryDate"),
+        deliveryTime: data.get("deliveryTime"),
+        address: data.get("address"),
+        items: selected.map((checkbox) => ({
+          menuId: Number(checkbox.value),
+          qty: Number(data.get(`qty-${checkbox.value}`)),
+          note: data.get(`note-${checkbox.value}`),
+        })),
+      };
+
+      const response = await fetch("/api/orders", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        message.innerHTML = `<div class="message">เกิดข้อผิดพลาด: ${result.error}</div>`;
+        return;
+      }
+
+      form.reset();
+      message.innerHTML = `<div class="message">บันทึกคำสั่งซื้อ #${result.id} สำเร็จ ยอดรวม ${result.total} บาท</div>`;
+    });
+
+    loadMenuChoices();
+  </script>
+</body>
+</html>
