@@ -1,0 +1,51 @@
+{
+  "types": [
+    {
+      "id": 1,
+      "name": "อาหารรสจัด"
+    },
+    {
+      "id": 2,
+      "name": "อาหารจานหลัก"
+    }
+  ],
+  "menus": [
+    {
+      "id": 1,
+      "code": "TH-001",
+      "name": "ส้มตำไทย",
+      "typeId": 1,
+      "price": 60,
+      "image": "/images/Somtam.jpg",
+      "description": "ส้มตำรสจัดจ้าน ครบรสเปรี้ยว หวาน เค็ม เผ็ด ตำสดใหม่ทุกจาน"
+    },
+    {
+      "id": 2,
+      "code": "TH-002",
+      "name": "ผัดไทยกุ้งสด",
+      "typeId": 2,
+      "price": 80,
+      "image": "/images/PadThai.jpg",
+      "description": "เส้นผัดไทยเหนียวนุ่ม ผัดกับซอสสูตรพิเศษ เสิร์ฟพร้อมกุ้งสด"
+    },
+    {
+      "id": 3,
+      "code": "TH-003",
+      "name": "ต้มยำกุ้งน้ำข้น",
+      "typeId": 1,
+      "price": 120,
+      "image": "/images/Tomyum.jpg",
+      "description": "ต้มยำกุ้งน้ำข้นรสเข้มข้น หอมสมุนไพรไทย เปรี้ยวเผ็ดกลมกล่อม"
+    },
+    {
+      "id": 4,
+      "code": "TH-004",
+      "name": "ไก่ทอดสมุนไพร",
+      "typeId": 2,
+      "price": 90,
+      "image": "/images/ChickenFried.jpg",
+      "description": "ไก่ทอดหมักเครื่องเทศและสมุนไพรไทย กรอบนอกนุ่มใน"
+    }
+  ],
+  "orders": []
+}
