@@ -1,0 +1,298 @@
+body {
+  margin: 0;
+  font-family: Arial, Tahoma, sans-serif;
+  background-color: #fff8ee;
+  color: #2d2924;
+}
+
+/* Lab12 controls added to the original Lab11 stylesheet. */
+#authBar { display: flex; align-items: center; flex-wrap: wrap; gap: 10px; margin-left: auto; }
+#accountForm { margin: 20px auto; }
+.rating { color: #8b6300; }
+[hidden] { display: none !important; }
+button:disabled { opacity: .6; cursor: wait; }
+@media (max-width: 640px) { .container { box-sizing: border-box; } #authBar { margin-left: 0; } }
+
+.hero {
+  min-height: 380px;
+  display: flex;
+  align-items: center;
+  background:
+    linear-gradient(90deg, rgba(45, 41, 36, 0.78), rgba(45, 41, 36, 0.18)),
+    url("/images/Tomyum.jpg") center/cover;
+  color: white;
+}
+
+.hero-content {
+  width: 90%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  max-width: 620px;
+  margin: 0 0 14px;
+  color: white;
+  font-size: 46px;
+}
+
+.hero p {
+  max-width: 560px;
+  margin-bottom: 22px;
+  line-height: 1.7;
+}
+
+.container {
+  width: 90%;
+  max-width: 980px;
+  margin: 25px auto;
+  padding: 25px;
+  background-color: white;
+  border: 1px solid #ead8c0;
+  border-radius: 8px;
+}
+
+h1 {
+  color: #9d3028;
+}
+
+h2 {
+  color: #2f6f4e;
+}
+
+nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 18px 0 24px;
+}
+
+nav a,
+.button {
+  display: inline-block;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 6px;
+  background-color: #9d3028;
+  color: white;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.secondary {
+  background-color: #2f6f4e;
+}
+
+.danger {
+  background-color: #b83232;
+}
+
+.image-grid,
+.menu-grid,
+.order-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 16px;
+}
+
+.feature-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.feature-grid article {
+  overflow: hidden;
+  border: 1px solid #ead8c0;
+  border-radius: 8px;
+  background-color: #fffdf8;
+}
+
+.feature-grid img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.feature-grid h3,
+.feature-grid p {
+  margin-left: 14px;
+  margin-right: 14px;
+}
+
+.feature-grid p {
+  color: #6b5c50;
+}
+
+.card {
+  border: 1px solid #ead8c0;
+  border-radius: 8px;
+  padding: 14px;
+  background-color: #fffdf8;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    min-height: 320px;
+  }
+
+  .hero h1 {
+    font-size: 34px;
+  }
+}
+
+.card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+.price {
+  color: #2f6f4e;
+  font-weight: bold;
+}
+
+.muted {
+  color: #6b5c50;
+}
+
+label {
+  display: block;
+  margin-top: 12px;
+  font-weight: bold;
+}
+
+input,
+textarea,
+select {
+  box-sizing: border-box;
+  width: 100%;
+  margin-top: 6px;
+  padding: 9px;
+  border: 1px solid #d8c4ac;
+  border-radius: 6px;
+  font: inherit;
+}
+
+input[type="checkbox"] {
+  width: auto;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 14px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ead8c0;
+  padding: 10px;
+  text-align: left;
+  vertical-align: top;
+}
+
+th {
+  background-color: #fff0dc;
+}
+
+pre {
+  overflow-x: auto;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #2d2924;
+  color: #fff8ee;
+}
+
+.message {
+  margin-top: 14px;
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #eef7f1;
+  color: #25563b;
+}
+
+.message.error {
+  background-color: #fff1f0;
+  color: #9d3028;
+}
+
+.toolbar {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 14px;
+  align-items: end;
+  margin-bottom: 20px;
+}
+
+.manager-panel {
+  margin-top: 22px;
+  padding-top: 22px;
+  border-top: 1px solid #ead8c0;
+}
+
+.manager-panel[hidden] {
+  display: none;
+}
+
+.item-actions.manager-only {
+  display: none;
+}
+
+.manager-open .item-actions.manager-only {
+  display: flex;
+}
+
+.menu-card {
+  position: relative;
+}
+
+.menu-card .badge {
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+.badge {
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #7a4d00;
+  background-color: #ffe3a3;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.item-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.item-actions .button {
+  padding: 8px 10px;
+}
+
+.menu-form {
+  max-width: 680px;
+}
+
+.form-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+@media (max-width: 840px) {
+  .toolbar {
+    grid-template-columns: 1fr;
+  }
+
+  .item-actions {
+    flex-wrap: wrap;
+  }
+}
